@@ -1,0 +1,9 @@
+java / 90000
+jdbc / 50000
+sql / 60000
+ms_sql / 70000
+sap / 53000
+R_program / 60000
+jsp / 70000
+html / 85000
+css / 10000
