@@ -1,1 +1,1 @@
-java day25_ex TcpIpClient
+java day26_ex TcpIpClient

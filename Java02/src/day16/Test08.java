@@ -1,13 +1,19 @@
 package day16;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Test08 {
-
+	BufferedInputStream bis = new BufferedInputStream(new FileInputStream);
+	BufferedReader keyboard = new BufferedReader(new InputStream(System.in)); 
 	public static void main(String[] args) {
 		try(FileInputStream fis = new FileInputStream("c://lib//sample.txt");) {
 		//implements closable이 생략되어있음
