@@ -148,26 +148,5 @@ select ename, sal, deptno, decode(deptno, 10, sal*10,
 										  10, sal*2,
 										  30, sal*3,
 										  sal) 계산 from emp; --data를 일률적으로 정리하기에 편함
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+s
 
