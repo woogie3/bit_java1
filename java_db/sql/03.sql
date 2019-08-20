@@ -198,9 +198,30 @@ select rownum, ename, sal, hiredate from (select * from emp order by sal desc) w
 select rownum, ename, sal, hiredate from (select * from emp order by sal desc) where rownum between 1 and 4; --top4 뽑아냄
 select rownum, ename, sal, hiredate from (select * from emp order by sal desc) where rownum between 4 and 7; --1부터 생성되기에 에러가 발생함
 
+ --##각각의 부서에서 급여가 가장 적은 사원리스트
+ select deptno, ename, sal
+ from emp
+ where sal in (select min(sal) from emp group by deptno);
  
+  --##각각의 부서에서 급여가 가장 많은 사원리스트
+ select deptno, ename, sal
+ from emp
+ where sal in (select max(sal) from emp group by deptno);
+ 
+ ################################################
+ --page처리
+ ###############################################
+select * from (
+select rownum row#, ename, sal, hiredate 
+from (select * from emp order by sal desc) 
+)
+where row# between 5 and 9;
 
 
+			start	end
+1page 1~5	5*0+1	+4
+2page 6~10	5*1+1	+4
+3page 11~15	5*2+1	+4
 
 
 
