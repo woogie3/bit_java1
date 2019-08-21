@@ -128,7 +128,9 @@ insert into dept2 values(50,'EDU','SEOUL');--정상적으로 실행됨
 commit;
 
 ################################################################
---트랜잭션
+--트랜잭션 
+ : DB에서 하나의 작업으로 처리되는 논리적 작업단위
+ ACID(Atomicity,Consistency,Isolation,Durability)
 ################################################################
 create table emp2 as select * from emp;
 select * from emp2;
@@ -165,6 +167,48 @@ create table book(
 	author varchar2(30),
 	price number(7,2)constraint book_price_check check(price>0),
 	pubdate date default
+####################################################################################################
+delete from dept where deptno=50;
+
+drop table emp2;
+drop table dept2;
+
+create table emp2 as select * from emp;
+create table dept2 as select * from dept;
+
+alter table emp2 add CONSTRAINT emp2_pk primary key(empno);
+
+alter table emp2 add CONSTRAINT emp2_fk_mgr foreign key(mgr) references emp2;
+
+alter table dept2 add CONSTRAINT dept2_pk primary key(deptno);
+
+alter table emp2 add CONSTRAINT emp2_fk1 foreign key(deptno) references dept2;
+
+
+
+delete from dept where deptno=20; x
+
+
+
+alter table emp2 drop CONSTRAINT emp2_fk1;
+
+alter table emp2 add CONSTRAINT emp2_fk1 foreign key(deptno) references dept2 on delete set null;
+
+delete from dept2 where deptno=20; o --삭제되고 자식은 null
+select * from emp2;
+rollback;
+
+alter table emp2 drop CONSTRAINT emp2_fk1;
+alter table emp2 add CONSTRAINT emp2_fk1 foreign key(deptno) references dept2 on delete cascade;
+delete from dept2 where deptno=20; --삭제되고 자식튜플도 삭제
+rollback;
+
+select * from dept2;
+insert into dept2 values(50,'EDU','SEOUL');
+select * from emp2;
+insert into emp2(empno,ename,hiredate,sal,deptno) values(7777,'고길동',sysdate,0,50);
+insert into emp2(empno,ename,hiredate,sal,deptno) values(8888,'이길동',sysdate,0,null,10);
+
 
 
 
