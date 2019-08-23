@@ -40,6 +40,16 @@ create or replace view highsalavg
 as
 select ename, sal, deptno from emp outer where sal > (select avg(sal) from emp where deptno = outer.deptno);
 select * from highsalavg;
+select avg(sal) from emp where deptno=10;
+
+create or replace view vvv
+as
+select * from emp outer where sal > (select avg(sal) from emp where deptno=outer.deptno);
+
+
+
+
+
 
 
 ###################################################
@@ -110,6 +120,9 @@ dumpfile = madang_20140701.dmp TABLES=orders
 select * from Orders;
 
 
+
+
+
 ##############################################################
 08_21_과제
 ##############################################################
@@ -145,24 +158,44 @@ update users set password='1q2w3e' where id='user1';
 update users set name='김길동' where id='user1';
 update users set role='군인' where id='user1';
 --로그인
+select * from users where id = 'user1' and password ='1q2w';
+select * from users where id = 'user2' and password ='3e4r';
+select * from users where id = 'user3' and password ='3333';
+select * from users where id = 'user4' and password ='4444';
 
 --게시판 글 등록
+insert into board(seq,title,content,regdate,cnt,id) 
+values((select nvl(max(seq),0)+1 from board)  ,'게시글','게시글','2019/08/21',0,'user1');
+insert into board(seq,title,content,regdate,cnt,id) 
+values((select nvl(max(seq),0)+1 from board)  ,'게시글1','게시글1','2019/08/21',0,'user2');
+insert into board(seq,title,content,regdate,cnt,id) 
+values((select nvl(max(seq),0)+1 from board)  ,'게시글2','게시글2','2019/08/21',0,'user3');
 
 --글수정
+update board set content = '이길동님 글입니다' where title = '게시글2';
 
 --글삭제
+delete from board where seq=1;
+commit;
 
 --데이터검색
+select * from board where title = '게시글';
 
 --전체 글 등록수
+select count(*) as 게시글 갯수 from board;
 
 --사용자별 글 등록수
+select id,count(*) as 게시글 갯수 from board group by id order by id;
 
 --월별 게시글 수
+select to_char(regdate,'mm')as 월 ,count(seq) 
+from board group by to_char(regdate,'mm') order by to_char(regdate,'mm');
 
 --게시글검색(옵션:사용자별)
+select * from board where id= 'user1';
 
 --게시글검색(옵션:제목)
+select * from board where title = '게시글2';
 	
 	
 	

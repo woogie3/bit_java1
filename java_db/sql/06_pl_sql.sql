@@ -15,8 +15,24 @@ begin
 end;
 /
 
+select * from emp;
+
 execute update_sal(7369);
 commit;
+
+
+create or replace procedure update_sal(v_deptno in number)
+is
+begin
+ update emp
+ set sal=sal*2
+ where deptno=v_deptno;
+end;
+/
+execute update_sal(30);
+commit;
+
+
 
 drop procedure update_sal;
 
@@ -47,9 +63,11 @@ CREATE OR REPLACE PROCEDURE InsertBook(
 /
 
 
-EXEC InsertBook(1, '스포츠과학', '마당과학서적', 25000);
+EXEC InsertBook(1, 'java02', '한빛', 27000);
+EXEC InsertBook(2, '스포츠과학', '마당과학서적', 25000);
 
 SELECT * FROM Book;
+rollback;
 
 **********************************
 동일한 도서가 있는지 점검한 후 
@@ -74,8 +92,10 @@ CREATE OR REPLACE PROCEDURE BookInsertOrUpdate(
    END IF;
  END;
 /
-
+EXEC BookInsertOrUpdate(1,'db','bit',0);
 EXEC BookInsertOrUpdate(2, '스포츠 즐거움', '마당과학서적', 25000);
+SELECT * FROM Book; 
+EXEC BookInsertOrUpdate(1,'db','bit',200);
 SELECT * FROM Book; 
 /* 2번 투플 삽입 결과 확인 */
 
@@ -90,6 +110,25 @@ SELECT * FROM Book;
 function
 ###############################
 drop function fn_update_sal;
+
+create or replace function fn1(price NUMBER)
+return int
+is
+ myInterest NUMBER;
+begin
+	/*price가 30000원 이상이면 10%, 30000원미만이면 5%*/
+ IF Price >= 30000 THEN myInterest := Price * 0.1;
+    ELSE myInterest := Price * 0.05; /* pl_sql에서 ':=' 함수호출*/
+   END IF;
+   RETURN myInterest;
+  END;
+  /
+  
+ **** 사용자 정의 함수 실행 ****
+ select empno, ename, sal, fn1(sal) from emp;
+ 
+ 
+ 
 
 create or replace function fn_update_sal(v_empno in number)
 return number
@@ -112,6 +151,35 @@ print salary;
 trigger
 ####################################
 
+drop table book;
+CREATE TABLE Book (
+  bookid      NUMBER(2) PRIMARY KEY,
+  bookname    VARCHAR2(40),
+  publisher   VARCHAR2(40),
+  price       NUMBER(8) 
+);
+
+ CREATE TABLE Book_log(
+    bookid_l NUMBER,
+    bookname_l VARCHAR2(40),
+    publisher_l VARCHAR2(40),
+    price_l NUMBER
+ );
+ insert into book values(3,'java01', '한빛', 7000);
+ select * from book;
+ select * from book_log;
+ 
+ CREATE OR REPLACE TRIGGER AfterInsertBook
+     AFTER INSERT ON Book FOR EACH ROW
+     DECLARE
+      
+     BEGIN
+        INSERT INTO Book_log
+           VALUES(:new.bookid, :new.bookname, :new.publisher, :new.price);
+        DBMS_OUTPUT.PUT_LINE('Book_log 테이블에 백업..');
+     END;
+/
+set serveroutput on;
 
 create table item(
   code char(6) primary key, --물품 코드

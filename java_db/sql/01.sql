@@ -10,6 +10,30 @@ create tablespace bit
 datafile 'c:\lib\bit.dbf'
 size 30M
 autoextend on next 2M maxsize UNLIMITED;
+---------------------
+create tablespace java_test
+datafile 'c:\lib\java_test.dbf'
+size 10M;
+
+CREATE TABLE Customer(
+	custid NUMBER primary key,
+	name VARCHAR2(40),
+	address VARCHAR2(40),
+	phone VARCHAR2(30)
+);
+
+CREATE TABLE Orders(
+	orderid NUMBER primary key,
+	custid NUMBER not null,
+	bookid NUMBER not null,
+	saleprice NUMBER,
+	orderdate DATE,
+	foreign key(custid) references Customer(custid) ON DELETE CASCADE
+	);
+
+
+
+-------------------
 
 --계정생성
 create user test01 identified by 1234;
