@@ -10,7 +10,7 @@ import util.JDBCUtil;
 import vo.Book;
 import vo.Department;
 
-public class BookDao {
+public class BookDao_test {
 	//Department 테이블의 모든 레코드정보
 	
 		public List<Book> getAllBookRec() {

@@ -12,7 +12,7 @@ import vo.Department;
 public class DeptDao {
 	
 	//Department 테이블의 모든 레코드정보
-	public List<Department> getAllDeptRec() {
+	public List<Department> getDeptRec() {
 		String sql = "select * from dept order by deptno";
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -43,6 +43,48 @@ public class DeptDao {
 	
 	
 	}
+	public List<Department> getDeptRec(int page, int n) { //페이지 리스트 처리
+		String sql = "select * from ( " + 
+				"select rownum row#, deptno, dname, loc "
+				+ "from (select * from dept order by deptno) " + 
+				") where row# between ? and ?";
+		
+		
+		int start = n*(page-1)+1;
+		int end = start+(n-1);
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		List<Department> list = new ArrayList<Department>();
+		try {
+//			System.out.println("**********con할당*********");
+			con = JDBCUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			// ? 세팅
+			ps.setInt(1, start);
+			ps.setInt(2, end);
+			
+			//실행 및 결과값 핸들링
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				list.add(new Department(rs.getInt("deptno"), //department안에 정보를 list에 추가해야한다.
+							   rs.getString("dname"),
+							   rs.getString("loc")));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(con, ps, rs);
+//			System.out.println("**********con반납*********");
+		}
+		return list;
+	
+	
+	}
+	
 	
 	
 	//Department 테이블의 업데이트

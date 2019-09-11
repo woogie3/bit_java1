@@ -8,7 +8,7 @@ import util.JDBCUtil;
 import vo.Department;
 import vo.Employee;
 
-public class Test09 {
+public class Test09_DeptDao {
 
 	public static void main(String[] args) {
 		

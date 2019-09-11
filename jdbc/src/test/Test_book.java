@@ -1,12 +1,12 @@
 package test;
 
-import dao.BookDao;
+import dao.BookDao_test;
 import vo.Book;
 
 public class Test_book {
 
 	public static void main(String[] args) {
-		BookDao dao = new BookDao();
+		BookDao_test dao = new BookDao_test();
 		int Icount = 0;
 		int Ucount = 0;
 		int Dcount = 0;

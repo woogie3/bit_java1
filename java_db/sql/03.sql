@@ -224,6 +224,10 @@ where row# between 5 and 9;
 3page 11~15	5*2+1	+4
 
 
+--page 연산처리시 사용되는 기본적인 구문
+select * from (
+select rownum row#, deptno, dname, loc from (select * from dept order by deptno)
+) where row# between 1 and 3; 
 
 
 
