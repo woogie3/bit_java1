@@ -1,0 +1,157 @@
+@charset "UTF-8";
+
+  @import url('https://fonts.googleapis.com/css?family=Indie+Flower&display=swap');
+  
+	@media screen and (max-width: 1000px){/*반응형 웹을 제작할때 사용*/
+		body{
+			background-color: #e7ecdf; 
+			
+		}
+	}
+/* 	 *{				모든태그의 마진과 패딩값을 초기화
+		margin: 0px;
+		padding: 0px;
+		
+	}
+	nav{
+	background-color: black;
+	line-height: 3em;
+	width: 100%;
+	height: 3em;
+  }
+	#drop ul{		div id drop 값이 리스트 스타일을 없애준다.
+		list-style: none;
+	}
+	#drop ul li{	기본적 박스배경과 경계와 크기와 텍스트정렬 설정
+		background-color: black;
+		border: 1px solid #fff;
+			width: 100px;
+			height: 400px;
+			line-height: 40px;
+			text-align: center;
+			float: left;
+			position: absolute;
+	}
+	#drop ul li a{	<a>태그에서 글자의 밑줄을 없애고 텍스트 색상과 블락모양으로 표시하게하고 커서가 올라갈시 모양 유지
+		text-decoration: none;
+		color: white;
+		display: block;
+	}
+	#drop ul li a:hover{ 마우스가 닿았을때 변경함
+		background-color: darkorange;  
+	}
+	#drop ul ul{ 평소 하위메뉴를 보이지 않게 적용
+		display: none;
+		list-style: none;
+		text-align: center;
+	}
+	#drop ul li:hover >ul{ 마우스가 닿은 하위메뉴에 효과적용
+		display:block;
+	}  */
+	h1,h2,h3,h4,h5{
+		font-family: 'Indie Flower', cursive;
+	}
+   nav{
+	background-color: black;
+	line-height: 3em;
+	width: 100%;
+	height: 3em;
+	color : white;
+  }
+  ul{
+	  list-style: none;
+  }
+  nav ul{
+	list-style: none;
+	text-align: center;
+  }
+  nav ul li{
+	  display: inline;
+	  padding: 10px;
+  }
+  nav ul li a{
+	  text-decoration: none;
+	  color: white;
+	  font-weight: bold;
+  }
+ 
+  a{
+	  text-decoration:  none;
+  }
+  a:hover{
+	  text-decoration: underline;
+  } 
+  section {
+	width: 90%;
+	min-height:500px;
+	/*background-color: yellow;*/
+	float: left;
+  }
+ 
+  footer{
+	  clear: both;
+	  width: 100%;
+	  height: 3em;
+	  background-color: black;
+	  color: white;
+	  text-align: center;
+	  /* margin: 0 auto; */
+	  line-height: 3em;/*height와 맞추어야 수직정렬됨 */
+
+	  }
+	a.btn{
+		display: block;
+	color: black;
+	text-align: center;
+	width: 100px;
+	height: 40px;
+	border: 1px solid gray;
+	border-radius: 15px;
+	line-height: 40px;
+	text-decoration: none;
+	background-color: aliceblue;
+	font-weight: bold;
+	font-size: 1.2em;
+	margin: 0 auto;
+	}
+	
+	img{
+	width: 300px;
+	height: 300px;
+	}
+	
+	header hgroup h1{
+	text-align: center;
+	}
+ 	header hgroup h2{
+ 	position: absolute;
+ 	right: 0px;
+ 	top: -40px;
+ 	} 
+ 	
+ 	header{
+ 	width: 100%;
+ 	height: 4em;
+ 	/*border: 2px solid blue;*/
+ 	position: relative;
+ 	/*background-color: gray;*/
+ 	}
+ 	.dropbox{
+ 	position: relative;
+ 	}
+ 	.dropmenu{
+ 	visibility: hidden;
+ 	position: absolute;
+ 	top: 30px;
+ 	left: 0px;
+ 	}
+ 	.dropbox:hover > .dropmenu{
+ 	visibility: visible;
+ 	}
+ 	#etc{
+ 	text-decoration: none;
+ 	}	
+ 	.dropbox:hover{
+ 	visibility: visible;
+ 	}
+  
